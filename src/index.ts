@@ -16,7 +16,7 @@ async function* normalizeFiles(files: ForAwaitable<InputWithMeta | InputWithoutM
   }
 }
 
-export const downloadZip = (files: ForAwaitable<InputWithMeta | InputWithoutMeta>) => new Response(
+export const downloadZip = (files: ForAwaitable<InputWithMeta | InputWithoutMeta>, init: ResponseInit = { headers: { "Content-Type": "application/zip", "Content-Disposition": "attachment" } }) => new Response(
   ReadableFromIter(loadFiles(normalizeFiles(files))),
-  { headers: { "Content-Type": "application/zip", "Content-Disposition": "attachment" } }
+  init
 )
