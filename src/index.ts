@@ -73,7 +73,7 @@ export function downloadZip(files: ForAwaitable<InputWithMeta | InputWithSizeMet
   const headers: Record<string, any> = { "Content-Type": "application/zip", "Content-Disposition": "attachment" }
   if ((typeof options.length === "bigint" || Number.isInteger(options.length)) && options.length! > 0) headers["Content-Length"] = String(options.length)
   if (options.metadata) headers["Content-Length"] = String(predictLength(options.metadata))
-  if (options.filename) headers["Content-Disposition"] = `attachment; filename=\"${encodeURIComponent(options.filename)}\"`
+  if (options.filename) headers["Content-Disposition"] = `attachment; filename*=UTF-8''${encodeURIComponent(options.filename)}`
   if (options.cacheControl) headers["Cache-Control"] = options.cacheControl;
   return new Response(makeZip(files, options), { headers })
 }
